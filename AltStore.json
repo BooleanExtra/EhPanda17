@@ -1,18 +1,16 @@
 {
   "name": "EhPanda AltStore Source",
-  "identifier": "app.ehpanda.getboolean.altstore",
+  "identifier": "app.ehpanda17.altstore",
   "subtitle": "Unleash your passion for E-Hentai with EhPanda.",
   "description": "EhPanda is an unofficial app for iOS and iPadOS that allows users to access and explore adult manga and doujinshi from E-Hentai.\nWith a user-friendly interface, powerful search features, and a vast collection of content, it offers a personalized library and an immersive reading experience.\nNote: EhPanda is not affiliated with or endorsed by E-Hentai.",
   "iconURL": "https://github.com/EhPanda-Team/ehpanda-website/raw/main/public/img/appicon/appicon-512.png",
   "website": "https://ehpanda.app",
   "tintColor": "289979",
-  "featuredApps": [
-    "app.ehpanda.getboolean"
-  ],
+  "featuredApps": ["app.ehpanda17"],
   "apps": [
     {
       "name": "EhPanda",
-      "bundleIdentifier": "app.ehpanda.getboolean",
+      "bundleIdentifier": "app.ehpanda17",
       "developerName": "EhPanda Team",
       "subtitle": "Unleash your passion for E-Hentai with EhPanda.",
       "localizedDescription": "EhPanda is an unofficial app for iOS and iPadOS that allows users to access and explore adult manga and doujinshi from E-Hentai.\nWith a user-friendly interface, powerful search features, and a vast collection of content, it offers a personalized library and an immersive reading experience.\nNote: EhPanda is not affiliated with or endorsed by E-Hentai.",
@@ -60,7 +58,7 @@
       "identifier": "ehpanda-now-available",
       "caption": "An unofficial E-Hentai App for iOS & iPadOS.",
       "tintColor": "289979",
-      "appID": "app.ehpanda.getboolean",
+      "appID": "app.ehpanda17",
       "date": "2021-08-19",
       "notify": false
     }
