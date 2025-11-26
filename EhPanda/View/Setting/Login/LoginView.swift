@@ -121,6 +121,27 @@ private struct LoginTextField: View {
         self.description = description
         self.isPassword = isPassword
     }
+    
+    private var backgroundColor: Color {
+        colorScheme == .light ? Color(.systemGray6) : Color(.systemGray5)
+    }
+    
+    var login: some View {
+        Group {
+            if isPassword {
+                SecureField("", text: $text)
+            } else {
+                TextField("", text: $text)
+            }
+        }
+        .focused(focusedField.projectedValue, equals: isPassword ? .password : .username)
+        .textContentType(isPassword ? .password : .username)
+        .submitLabel(isPassword ? .done : .next)
+        .textInputAutocapitalization(.none)
+        .disableAutocorrection(true)
+        .keyboardType(isPassword ? .asciiCapable : .default)
+        .padding(10)
+    }
 
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
@@ -128,24 +149,14 @@ private struct LoginTextField: View {
                 .font(.caption)
                 .foregroundStyle(.secondary)
 
-            Group {
-                if isPassword {
-                    SecureField("", text: $text)
-                } else {
-                    TextField("", text: $text)
-                }
+            if #available(iOS 26.0, *) {
+                login.backport.glassEffect(
+                    .tinted(Color(.systemGray5)),
+                    in: .rect(cornerRadius: 8)
+                )
+            } else {
+                login.background(backgroundColor.opacity(0.75).cornerRadius(8))
             }
-            .focused(focusedField.projectedValue, equals: isPassword ? .password : .username)
-            .textContentType(isPassword ? .password : .username)
-            .submitLabel(isPassword ? .done : .next)
-            .textInputAutocapitalization(.none)
-            .disableAutocorrection(true)
-            .keyboardType(isPassword ? .asciiCapable : .default)
-            .padding(10)
-            .backport.glassEffect(
-                .tintedAndInteractive(color: Color(.systemGray5), isEnabled: false),
-                in: .rect(cornerRadius: 8)
-            )
         }
     }
 }
