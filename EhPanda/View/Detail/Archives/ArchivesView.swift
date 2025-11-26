@@ -186,7 +186,7 @@ private struct HathArchiveGrid: View {
             RoundedRectangle(cornerRadius: 10)
                 .stroke(borderColor, lineWidth: 1)
         )
-        .backport.glassEffect(.clear.interactive(), in: .rect(cornerRadius: 10))
+        .backport.glassEffect(.regularInteractive, in: .rect(cornerRadius: 10))
     }
 }
 
@@ -223,7 +223,7 @@ private struct DownloadButton: View {
             .background(backgroundColor)
             .animation(.default, value: backgroundColor)
             .clipShape(.rect(cornerRadius: 30))
-            .backport.glassEffect(.regular.interactive())
+            .backport.glassEffect(.regularInteractive)
             .padding(paddingInsets)
             .onTapGesture(perform: { if !isDisabled { action() }})
             .onLongPressGesture(

@@ -63,7 +63,7 @@ struct LoginView: View {
                     .font(.title)
                     .foregroundStyle(store.loginButtonColor)
                     .disabled(store.loginButtonDisabled)
-                    .backport.glassEffect(.regular.interactive(), in: .circle)
+                    .backport.glassEffect(.regularInteractive, in: .circle)
                     .clipShape(.circle)
                     .padding(.top, 30)
                 }
@@ -142,7 +142,10 @@ private struct LoginTextField: View {
             .disableAutocorrection(true)
             .keyboardType(isPassword ? .asciiCapable : .default)
             .padding(10)
-            .backport.glassEffect(.regular.tint(Color(.systemGray5)), in: .rect(cornerRadius: 8))
+            .backport.glassEffect(
+                .tintedAndInteractive(color: Color(.systemGray5), isEnabled: false),
+                in: .rect(cornerRadius: 8)
+            )
         }
     }
 }

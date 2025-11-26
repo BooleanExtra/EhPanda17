@@ -381,7 +381,7 @@ private struct HeaderSection: View {
                     }
                     .imageScale(.large)
                     .foregroundStyle(.tint)
-                    .backport.glassButtonStyle(.regular.interactive())
+                    .backport.glassButtonStyle()
                     .disabled(!CookieUtil.didLogin)
 
                     Button(action: navigateReadingAction) {
@@ -887,7 +887,7 @@ private struct CommentButton: View {
             .background(backgroundColor)
             .clipShape(shape)
         }
-        .backport.glassEffect(.clear.interactive(), in: shape)
+        .backport.glassEffect(.regularInteractive, in: shape)
     }
 }
 

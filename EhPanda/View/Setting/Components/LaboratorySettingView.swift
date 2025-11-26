@@ -70,7 +70,7 @@ struct LaboratoryCell: View {
         .cornerRadius(15)
         .lineLimit(1)
         .animation(.default, value: isOn)
-        .backport.glassEffect(.regular.interactive(), in: .rect(cornerRadius: 15))
+        .backport.glassEffect(.regularInteractive, in: .rect(cornerRadius: 15))
     }
 }
 

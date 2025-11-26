@@ -125,7 +125,7 @@ private struct UpperPanel: View {
                         .font(.title2)
                         .frame(width: 44, height: 44)
                 }
-                .backport.glassEffect(.regular.interactive())
+                .backport.glassEffect(.regularInteractive)
 
                 Text(title)
                     .font(.title2)
@@ -134,7 +134,7 @@ private struct UpperPanel: View {
                     .lineLimit(1)
                     .padding(.horizontal, 16)
                     .padding(.vertical, 8)
-                    .backport.glassEffect(.regular.interactive())
+                    .backport.glassEffect(.regularInteractive)
             }
 
             Spacer()
@@ -211,7 +211,7 @@ private struct UpperPanel: View {
             }
             .padding(.vertical, 12)
             .padding(.horizontal, 20)
-            .backport.glassEffect(.regular.interactive())
+            .backport.glassEffect(.regularInteractive)
         }
         .foregroundStyle(.primary)
         .padding(.horizontal, 20)
@@ -253,7 +253,7 @@ private struct LowerPanel<G: Gesture>: View {
                     .font(.title2)
                     .frame(width: 44, height: 44)
             }
-            .backport.glassEffect(.regular.interactive())
+            .backport.glassEffect(.regularInteractive)
             .gesture(dismissGesture)
             .opacity(showsSliderPreview ? 0 : 1)
 
