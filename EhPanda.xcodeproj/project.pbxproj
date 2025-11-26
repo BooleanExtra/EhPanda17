@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7E1F0E7F2ED6ABE4005C6249 /* SwiftUIBackports in Frameworks */ = {isa = PBXBuildFile; productRef = 7E1F0E7E2ED6ABE4005C6249 /* SwiftUIBackports */; };
 		AB0929B6277F043D00F107CA /* AccountSettingReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0929B5277F043D00F107CA /* AccountSettingReducer.swift */; };
 		AB0929BE2780032400F107CA /* EhSettingReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0929BD2780032400F107CA /* EhSettingReducer.swift */; };
 		AB0929C027805A8200F107CA /* LoginReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0929BF27805A8200F107CA /* LoginReducer.swift */; };
@@ -638,6 +639,7 @@
 				ABBB2636278FB888007B6149 /* SwiftUINavigation in Frameworks */,
 				AB1FA94927C62BC80063EF55 /* CommonMark in Frameworks */,
 				AB17573D27675B1E00FD64E2 /* Colorful in Frameworks */,
+				7E1F0E7F2ED6ABE4005C6249 /* SwiftUIBackports in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1590,6 +1592,7 @@
 				AB2EB9A1280251F600011A8A /* AlertKit */,
 				AB2EB9A42802521700011A8A /* DeprecatedAPI */,
 				EAE63E2029E2A6330048C601 /* SwiftyBeaver */,
+				7E1F0E7E2ED6ABE4005C6249 /* SwiftUIBackports */,
 			);
 			productName = EhPanda;
 			productReference = ABC3C7542593696C00E0C11B /* EhPanda.app */;
@@ -2556,6 +2559,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		7E1F0E7E2ED6ABE4005C6249 /* SwiftUIBackports */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7E1F0E7D2ED6A647005C6249 /* XCRemoteSwiftPackageReference "iOS-Backports" */;
+			productName = SwiftUIBackports;
+		};
 		AB17573C27675B1E00FD64E2 /* Colorful */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = AB17573B27675B1E00FD64E2 /* XCRemoteSwiftPackageReference "Colorful" */;
