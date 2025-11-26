@@ -121,11 +121,11 @@ private struct LoginTextField: View {
         self.description = description
         self.isPassword = isPassword
     }
-    
+
     private var backgroundColor: Color {
         colorScheme == .light ? Color(.systemGray6) : Color(.systemGray5)
     }
-    
+
     var login: some View {
         Group {
             if isPassword {
