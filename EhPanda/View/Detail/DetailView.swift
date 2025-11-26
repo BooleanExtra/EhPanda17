@@ -875,7 +875,7 @@ private struct CommentButton: View {
     var body: some View {
         let shape = RoundedRectangle(cornerRadius: 15)
 
-        Button(action: action) {
+        let button: Button<some View> = Button(action: action) {
             HStack {
                 Image(systemSymbol: .squareAndPencil)
 
@@ -883,11 +883,15 @@ private struct CommentButton: View {
                     .bold()
             }
             .padding()
-            .frame(maxWidth: .infinity)
             .background(backgroundColor)
+            .frame(maxWidth: .infinity)
             .clipShape(shape)
         }
-        .backport.glassEffect(.regularInteractive, in: shape)
+        if #available(iOS 26.0, *) {
+            button.glassEffect(.clear.interactive(), in: shape)
+        } else {
+            button.cornerRadius(15)
+        }
     }
 }
 

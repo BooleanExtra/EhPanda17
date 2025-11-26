@@ -191,7 +191,7 @@ extension QuickSearchView {
                     Button(role: .confirm, action: confirmAction)
                 } else {
                     Button(action: confirmAction) {
-                        Text("Confirm")
+                        Text(L10n.Localizable.QuickSearchView.ToolbarItem.Button.confirm).bold()
                     }
                 }
             }

@@ -46,7 +46,7 @@ struct PostCommentView: View {
                         Button(role: .close, action: cancelAction)
                     } else {
                         Button(action: cancelAction) {
-                            Text("Close")
+                            Text(L10n.Localizable.PostCommentView.Button.cancel)
                         }
                     }
                 }
@@ -56,7 +56,7 @@ struct PostCommentView: View {
                             .disabled(content.isEmpty)
                     } else {
                         Button(action: postAction) {
-                            Text("Post")
+                            Text(L10n.Localizable.PostCommentView.Button.post)
                         }
                         .disabled(content.isEmpty)
                     }

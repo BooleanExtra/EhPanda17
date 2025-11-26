@@ -26,33 +26,22 @@ struct SearchRootView: View {
 
     var body: some View {
         NavigationView {
-            mainContent
-        }
-    }
-
-    @ViewBuilder
-    private var mainContent: some View {
-        if DeviceUtil.isPad {
-            baseContent
-                .sheet(item: $store.route.sending(\.setNavigation).detail, id: \.self) { gid in
-                    detailSheetView(gid: gid)
-                }
-        } else {
-            if store.historyKeywords.isEmpty && store.historyGalleries.isEmpty {
-                baseContentWithSubtitle
-            } else {
+            if DeviceUtil.isPad {
                 baseContent
+                    .sheet(item: $store.route.sending(\.setNavigation).detail, id: \.self) { gid in
+                        detailSheetView(gid: gid)
+                    }
+            } else {
+                if store.historyKeywords.isEmpty && store.historyGalleries.isEmpty {
+                    if #available(iOS 26.0, *) {
+                        baseContent.navigationSubtitle(Text(" "))
+                    } else {
+                        baseContent.navigationTitle(Text(" "))
+                    }
+                } else {
+                    baseContent
+                }
             }
-        }
-    }
-
-    @ViewBuilder
-    private var baseContentWithSubtitle: some View {
-        if #available(iOS 26.0, *) {
-            baseContent
-                .navigationSubtitle(Text(" "))
-        } else {
-            baseContent
         }
     }
 

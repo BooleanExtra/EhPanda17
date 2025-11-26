@@ -164,7 +164,7 @@ private struct HathArchiveGrid: View {
     }
 
     var body: some View {
-        VStack(spacing: 10) {
+        let bodyStack: some View = VStack(spacing: 10) {
             Text(archive.resolution.value)
                 .font(.title3.bold())
 
@@ -179,14 +179,18 @@ private struct HathArchiveGrid: View {
             }
             .lineLimit(1)
         }
-        .foregroundColor(foregroundColor)
-        .frame(width: width, height: height)
-        .contentShape(.rect)
-        .overlay(
-            RoundedRectangle(cornerRadius: 10)
-                .stroke(borderColor, lineWidth: 1)
-        )
-        .backport.glassEffect(.regularInteractive, in: .rect(cornerRadius: 10))
+            .foregroundColor(foregroundColor)
+            .frame(width: width, height: height)
+            .contentShape(.rect)
+            .overlay(
+                RoundedRectangle(cornerRadius: 10)
+                    .stroke(borderColor, lineWidth: 1)
+            )
+        if #available(iOS 26.0, *) {
+            bodyStack.glassEffect(.clear.interactive(), in: .rect(cornerRadius: 10))
+        } else {
+            bodyStack
+        }
     }
 }
 

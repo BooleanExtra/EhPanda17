@@ -126,7 +126,7 @@ private struct LoginTextField: View {
         colorScheme == .light ? Color(.systemGray6) : Color(.systemGray5)
     }
 
-    var login: some View {
+    var loginFields: some View {
         Group {
             if isPassword {
                 SecureField("", text: $text)
@@ -134,13 +134,13 @@ private struct LoginTextField: View {
                 TextField("", text: $text)
             }
         }
-        .focused(focusedField.projectedValue, equals: isPassword ? .password : .username)
-        .textContentType(isPassword ? .password : .username)
-        .submitLabel(isPassword ? .done : .next)
-        .textInputAutocapitalization(.none)
-        .disableAutocorrection(true)
-        .keyboardType(isPassword ? .asciiCapable : .default)
-        .padding(10)
+            .focused(focusedField.projectedValue, equals: isPassword ? .password : .username)
+            .textContentType(isPassword ? .password : .username)
+            .submitLabel(isPassword ? .done : .next)
+            .textInputAutocapitalization(.none)
+            .disableAutocorrection(true)
+            .keyboardType(isPassword ? .asciiCapable : .default)
+            .padding(10)
     }
 
     var body: some View {
@@ -150,12 +150,9 @@ private struct LoginTextField: View {
                 .foregroundStyle(.secondary)
 
             if #available(iOS 26.0, *) {
-                login.backport.glassEffect(
-                    .tinted(Color(.systemGray5)),
-                    in: .rect(cornerRadius: 8)
-                )
+                loginFields.glassEffect(.regular.tint(Color(.systemGray5)), in: .rect(cornerRadius: 8))
             } else {
-                login.background(backgroundColor.opacity(0.75).cornerRadius(8))
+                loginFields.background(backgroundColor.opacity(0.75).cornerRadius(8))
             }
         }
     }
