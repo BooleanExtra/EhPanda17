@@ -5,6 +5,7 @@
 
 import SwiftUI
 import ComposableArchitecture
+import SwiftUIBackports
 
 struct LoginView: View {
     @Bindable private var store: StoreOf<LoginReducer>
@@ -62,7 +63,7 @@ struct LoginView: View {
                     .font(.title)
                     .foregroundStyle(store.loginButtonColor)
                     .disabled(store.loginButtonDisabled)
-                    .glassEffect(.regular.interactive(), in: .circle)
+                    .backport.glassEffect(.regular.interactive(), in: .circle)
                     .clipShape(.circle)
                     .padding(.top, 30)
                 }
@@ -141,7 +142,7 @@ private struct LoginTextField: View {
             .disableAutocorrection(true)
             .keyboardType(isPassword ? .asciiCapable : .default)
             .padding(10)
-            .glassEffect(.regular.tint(Color(.systemGray5)), in: .rect(cornerRadius: 8))
+            .backport.glassEffect(.regular.tint(Color(.systemGray5)), in: .rect(cornerRadius: 8))
         }
     }
 }

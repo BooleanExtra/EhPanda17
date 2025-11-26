@@ -5,6 +5,7 @@
 
 import SwiftUI
 import ComposableArchitecture
+import SwiftUIBackports
 
 struct ArchivesView: View {
     @Bindable private var store: StoreOf<ArchivesReducer>
@@ -185,7 +186,7 @@ private struct HathArchiveGrid: View {
             RoundedRectangle(cornerRadius: 10)
                 .stroke(borderColor, lineWidth: 1)
         )
-        .glassEffect(.clear.interactive(), in: .rect(cornerRadius: 10))
+        .backport.glassEffect(.clear.interactive(), in: .rect(cornerRadius: 10))
     }
 }
 
@@ -222,7 +223,7 @@ private struct DownloadButton: View {
             .background(backgroundColor)
             .animation(.default, value: backgroundColor)
             .clipShape(.rect(cornerRadius: 30))
-            .glassEffect(.regular.interactive())
+            .backport.glassEffect(.regular.interactive())
             .padding(paddingInsets)
             .onTapGesture(perform: { if !isDisabled { action() }})
             .onLongPressGesture(

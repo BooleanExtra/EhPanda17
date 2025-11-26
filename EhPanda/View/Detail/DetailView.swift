@@ -7,6 +7,7 @@ import SwiftUI
 import Kingfisher
 import ComposableArchitecture
 import CommonMark
+import SwiftUIBackports
 
 struct DetailView: View {
     @Bindable private var store: StoreOf<DetailReducer>
@@ -380,7 +381,7 @@ private struct HeaderSection: View {
                     }
                     .imageScale(.large)
                     .foregroundStyle(.tint)
-                    .buttonStyle(.glass(.regular.interactive()))
+                    .backport.glassButtonStyle(.regular.interactive())
                     .disabled(!CookieUtil.didLogin)
 
                     Button(action: navigateReadingAction) {
@@ -389,7 +390,7 @@ private struct HeaderSection: View {
                             .foregroundColor(.white).padding(.vertical, -2)
                             .padding(.horizontal, 2).lineLimit(1)
                     }
-                    .buttonStyle(.glassProminent)
+                    .backport.glassProminentButtonStyle()
                     .buttonBorderShape(.capsule)
                 }
                 .minimumScaleFactor(0.5)
@@ -886,7 +887,7 @@ private struct CommentButton: View {
             .background(backgroundColor)
             .clipShape(shape)
         }
-        .glassEffect(.clear.interactive(), in: shape)
+        .backport.glassEffect(.clear.interactive(), in: shape)
     }
 }
 

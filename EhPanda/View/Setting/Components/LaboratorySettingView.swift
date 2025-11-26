@@ -5,6 +5,7 @@
 
 import SwiftUI
 import SFSafeSymbols
+import SwiftUIBackports
 
 struct LaboratorySettingView: View {
     @Binding private var bypassesSNIFiltering: Bool
@@ -69,7 +70,7 @@ struct LaboratoryCell: View {
         .cornerRadius(15)
         .lineLimit(1)
         .animation(.default, value: isOn)
-        .glassEffect(.regular.interactive(), in: .rect(cornerRadius: 15))
+        .backport.glassEffect(.regular.interactive(), in: .rect(cornerRadius: 15))
     }
 }
 

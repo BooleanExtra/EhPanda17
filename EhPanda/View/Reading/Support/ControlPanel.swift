@@ -5,6 +5,7 @@
 
 import SwiftUI
 import Kingfisher
+import SwiftUIBackports
 
 // MARK: ControlPanel
 struct ControlPanel<G: Gesture>: View {
@@ -124,7 +125,7 @@ private struct UpperPanel: View {
                         .font(.title2)
                         .frame(width: 44, height: 44)
                 }
-                .glassEffect(.regular.interactive())
+                .backport.glassEffect(.regular.interactive())
 
                 Text(title)
                     .font(.title2)
@@ -133,7 +134,7 @@ private struct UpperPanel: View {
                     .lineLimit(1)
                     .padding(.horizontal, 16)
                     .padding(.vertical, 8)
-                    .glassEffect(.regular.interactive())
+                    .backport.glassEffect(.regular.interactive())
             }
 
             Spacer()
@@ -210,7 +211,7 @@ private struct UpperPanel: View {
             }
             .padding(.vertical, 12)
             .padding(.horizontal, 20)
-            .glassEffect(.regular.interactive())
+            .backport.glassEffect(.regular.interactive())
         }
         .foregroundStyle(.primary)
         .padding(.horizontal, 20)
@@ -252,7 +253,7 @@ private struct LowerPanel<G: Gesture>: View {
                     .font(.title2)
                     .frame(width: 44, height: 44)
             }
-            .glassEffect(.regular.interactive())
+            .backport.glassEffect(.regular.interactive())
             .gesture(dismissGesture)
             .opacity(showsSliderPreview ? 0 : 1)
 
@@ -290,7 +291,7 @@ private struct LowerPanel<G: Gesture>: View {
                         .padding()
                 }
             }
-            .glassEffect(in: .rect(cornerRadius: 16))
+            .backport.glassEffect(in: .rect(cornerRadius: 16))
             .padding(.horizontal, SliderPreivew.outerPadding)
         }
     }
