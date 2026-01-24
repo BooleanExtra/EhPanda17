@@ -275,7 +275,7 @@ private struct LowerPanel<G: Gesture>: View {
         self.dismissAction = dismissAction
         self.fetchPreviewURLsAction = fetchPreviewURLsAction
     }
-    
+
     var slider: some View {
         Slider(
             value: $sliderValue,
