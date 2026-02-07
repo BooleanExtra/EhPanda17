@@ -53,15 +53,22 @@ struct LaboratoryCell: View {
     }
 
     var body: some View {
-        HStack {
-            Image(systemSymbol: symbol)
+        let cell = HStack {
+            if #available(iOS 26.0, *) {
+                Image(systemSymbol: symbol)
 
-            Text(title)
-                .bold()
+                Text(title)
+                    .bold()
+            } else {
+                Spacer()
+                Group {
+                    Image(systemSymbol: symbol)
+                    Text(title).bold()
+                }
+                .foregroundColor(contentColor).font(.title2)
+                Spacer()
+            }
         }
-        .foregroundStyle(contentColor)
-        .font(.title2)
-        .frame(maxWidth: .infinity)
         .contentShape(.rect)
         .onTapGesture(perform: { isOn.toggle() })
         .minimumScaleFactor(0.75)
@@ -70,7 +77,17 @@ struct LaboratoryCell: View {
         .cornerRadius(15)
         .lineLimit(1)
         .animation(.default, value: isOn)
-        .backport.glassEffect(.regularInteractive, in: .rect(cornerRadius: 15))
+        
+        if #available(iOS 26.0, *) {
+            cell
+                .foregroundStyle(contentColor)
+                .font(.title2)
+                .frame(maxWidth: .infinity)
+                .glassEffect(.regular.interactive(), in: .rect(cornerRadius: 15))
+        } else {
+            cell
+        }
+        
     }
 }
 

@@ -362,7 +362,7 @@ private struct HeaderSection: View {
 
                     Spacer()
 
-                    ZStack {
+                    let buttonsStack = ZStack {
                         Button(action: unfavorAction) {
                             Image(systemSymbol: .heartFill)
                         }
@@ -381,8 +381,13 @@ private struct HeaderSection: View {
                     }
                     .imageScale(.large)
                     .foregroundStyle(.tint)
-                    .backport.glassButtonStyle()
                     .disabled(!CookieUtil.didLogin)
+                    if #available(iOS 26.0, *) {
+                        buttonsStack
+                            .buttonStyle(.glass(.regular.interactive()))
+                    } else {
+                        buttonsStack
+                    }
 
                     Button(action: navigateReadingAction) {
                         Text(L10n.Localizable.DetailView.Button.read)
@@ -875,22 +880,31 @@ private struct CommentButton: View {
     var body: some View {
         let shape = RoundedRectangle(cornerRadius: 15)
 
-        let button: Button<some View> = Button(action: action) {
-            HStack {
-                Image(systemSymbol: .squareAndPencil)
-
-                Text(L10n.Localizable.DetailView.Button.postComment)
-                    .bold()
-            }
-            .padding()
-            .background(backgroundColor)
-            .frame(maxWidth: .infinity)
-            .clipShape(shape)
-        }
         if #available(iOS 26.0, *) {
-            button.glassEffect(.clear.interactive(), in: shape)
+            Button(action: action) {
+                HStack {
+                    Image(systemSymbol: .squareAndPencil)
+                    
+                    Text(L10n.Localizable.DetailView.Button.postComment)
+                        .bold()
+                }
+                .padding()
+                .frame(maxWidth: .infinity)
+                .background(backgroundColor)
+                .clipShape(shape)
+            }
+            .glassEffect(.clear.interactive(), in: shape)
         } else {
-            button.cornerRadius(15)
+            Button(action: action) {
+                HStack {
+                    Spacer()
+                    Image(systemSymbol: .squareAndPencil)
+                    Text(L10n.Localizable.DetailView.Button.postComment).bold()
+                    Spacer()
+
+                }
+                .padding().background(backgroundColor).cornerRadius(15)
+            }
         }
     }
 }

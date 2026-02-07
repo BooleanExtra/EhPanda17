@@ -117,134 +117,201 @@ private struct UpperPanel: View {
         self.retryAllFailedImagesAction = retryAllFailedImagesAction
     }
 
-    var liveTextButton: some View {
-        Button {
-            enablesLiveText.toggle()
-        } label: {
-            Image(systemSymbol: .viewfinderCircle)
-                .symbolVariant(enablesLiveText ? .fill : .none)
-                .font(.title2)
-        }
-    }
-
-    var dualPageButton: some View {
-        Menu {
-            Button {
-                setting.enablesDualPageMode.toggle()
-            } label: {
-                Text(L10n.Localizable.ReadingView.ToolbarItem.Title.dualPageMode)
-                if setting.enablesDualPageMode {
-                    Image(systemSymbol: .checkmark)
-                }
-            }
-            Button {
-                setting.exceptCover.toggle()
-            } label: {
-                Text(L10n.Localizable.ReadingView.ToolbarItem.Title.exceptTheCover)
-                if setting.exceptCover {
-                    Image(systemSymbol: .checkmark)
-                }
-            }
-            .disabled(!setting.enablesDualPageMode)
-        } label: {
-            Image(systemSymbol: .rectangleSplit2x1)
-                .symbolVariant(setting.enablesDualPageMode ? .fill : .none)
-                .font(.title2)
-        }
-    }
-
-    var autoPlayButton: some View {
-        Menu {
-            Text(L10n.Localizable.ReadingView.ToolbarItem.Title.autoPlay).foregroundColor(.secondary)
-            ForEach(AutoPlayPolicy.allCases) { policy in
-                Button {
-                    autoPlayPolicy = policy
-                } label: {
-                    Text(policy.value)
-                    if autoPlayPolicy == policy {
-                        Image(systemSymbol: .checkmark)
-                    }
-                }
-            }
-        } label: {
-            Image(systemSymbol: .timer)
-                .font(.title2)
-        }
-            .buttonStyle(.borderless)
-    }
-
-    var toolbarFeaturesMenu: some View {
-        ToolbarFeaturesMenu {
-            Button(action: retryAllFailedImagesAction) {
-                Image(systemSymbol: .exclamationmarkArrowTriangle2Circlepath)
-                Text(L10n.Localizable.ReadingView.ToolbarItem.Button.retryAllFailedImages)
-            }
-            Button(action: reloadAllImagesAction) {
-                Image(systemSymbol: .arrowCounterclockwise)
-                Text(L10n.Localizable.ReadingView.ToolbarItem.Button.reloadAllImages)
-            }
-            Button(action: navigateSettingAction) {
-                Image(systemSymbol: .gear)
-                Text(L10n.Localizable.ReadingView.ToolbarItem.Button.readingSetting)
-            }
-        }
-        .buttonStyle(.borderless)
-        .font(.title2)
-    }
-
-    var titleBarActions: some View {
-        HStack(spacing: 20) {
-            liveTextButton
-
-            if DeviceUtil.isLandscape && setting.readingDirection != .vertical {
-                dualPageButton
-            }
-
-            autoPlayButton
-            toolbarFeaturesMenu
-        }
-        .padding(.vertical, 12)
-        .padding(.horizontal, 20)
-        .backport.glassEffect(.regularInteractive)
-    }
-
-    var buttonAndTitle: some View {
-        HStack(spacing: 16) {
-            Button(action: dismissAction) {
-                Image(systemSymbol: .xmark)
-                    .font(.title2)
-                    .frame(width: 44, height: 44)
-            }.backport.glassEffect(.regularInteractive)
-
-            Text(title)
-                .font(.title2)
-                .fontWeight(.bold)
-                .monospacedDigit()
-                .lineLimit(1)
-                .padding(.horizontal, 16)
-                .padding(.vertical, 8)
-                .backport.glassEffect(.regularInteractive)
-        }
-    }
-
     var body: some View {
         if #available(iOS 26.0, *) {
             HStack {
-                buttonAndTitle
+                HStack(spacing: 16) {
+                    Button(action: dismissAction) {
+                        Image(systemSymbol: .xmark)
+                            .font(.title2)
+                            .frame(width: 44, height: 44)
+                    }
+                    .glassEffect(.regular.interactive())
+
+                    Text(title)
+                        .font(.title2)
+                        .fontWeight(.bold)
+                        .monospacedDigit()
+                        .lineLimit(1)
+                        .padding(.horizontal, 16)
+                        .padding(.vertical, 8)
+                        .glassEffect(.regular.interactive())
+                }
+
                 Spacer()
-                titleBarActions
+
+                HStack(spacing: 20) {
+                    Button {
+                        enablesLiveText.toggle()
+                    } label: {
+                        Image(systemSymbol: .viewfinderCircle)
+                            .symbolVariant(enablesLiveText ? .fill : .none)
+                            .font(.title2)
+                    }
+
+                    if DeviceUtil.isLandscape && setting.readingDirection != .vertical {
+                        Menu {
+                            Button {
+                                setting.enablesDualPageMode.toggle()
+
+
+
+                            } label: {
+                                Text(L10n.Localizable.ReadingView.ToolbarItem.Title.dualPageMode)
+                                if setting.enablesDualPageMode {
+                                    Image(systemSymbol: .checkmark)
+                                }
+                            }
+                            Button {
+                                setting.exceptCover.toggle()
+                            } label: {
+                                Text(L10n.Localizable.ReadingView.ToolbarItem.Title.exceptTheCover)
+                                if setting.exceptCover {
+                                    Image(systemSymbol: .checkmark)
+
+
+
+
+
+                                }
+                            }
+                            .disabled(!setting.enablesDualPageMode)
+                        } label: {
+                            Image(systemSymbol: .rectangleSplit2x1)
+                                .symbolVariant(setting.enablesDualPageMode ? .fill : .none)
+                                .font(.title2)
+                        }
+                    }
+
+                    Menu {
+                        Text(L10n.Localizable.ReadingView.ToolbarItem.Title.autoPlay).foregroundColor(.secondary)
+                        ForEach(AutoPlayPolicy.allCases) { policy in
+                            Button {
+                                autoPlayPolicy = policy
+                            } label: {
+                                Text(policy.value)
+                                if autoPlayPolicy == policy {
+                                    Image(systemSymbol: .checkmark)
+                                }
+                            }
+                        }
+                    } label: {
+                        Image(systemSymbol: .timer)
+                            .font(.title2)
+                    }
+                    .buttonStyle(.borderless)
+
+                    ToolbarFeaturesMenu {
+                        Button(action: retryAllFailedImagesAction) {
+                            Image(systemSymbol: .exclamationmarkArrowTriangle2Circlepath)
+                            Text(L10n.Localizable.ReadingView.ToolbarItem.Button.retryAllFailedImages)
+                        }
+                        Button(action: reloadAllImagesAction) {
+                            Image(systemSymbol: .arrowCounterclockwise)
+                            Text(L10n.Localizable.ReadingView.ToolbarItem.Button.reloadAllImages)
+                        }
+                        Button(action: navigateSettingAction) {
+                            Image(systemSymbol: .gear)
+                            Text(L10n.Localizable.ReadingView.ToolbarItem.Button.readingSetting)
+                        }
+                    }
+                    .buttonStyle(.borderless)
+                    .font(.title2)
+                }
+                .padding(.vertical, 12)
+                .padding(.horizontal, 20)
+                .glassEffect(.regular.interactive())
             }
             .foregroundStyle(.primary)
             .padding(.horizontal, 20)
         } else {
-            HStack {
-                buttonAndTitle
-                Spacer()
-                titleBarActions
+            ZStack {
+                HStack {
+                    Button(action: dismissAction) {
+                        Image(systemSymbol: .xmark)
+
+
+                    }
+                    .font(.title2).padding(.leading, 20)
+                    Spacer()
+                    Slider(value: .constant(0)).opacity(0)
+                    Spacer()
+                    HStack(spacing: 20) {
+                        Button {
+                            enablesLiveText.toggle()
+                        } label: {
+                            Image(systemSymbol: .viewfinderCircle)
+                                .symbolVariant(enablesLiveText ? .fill : .none)
+                        }
+                        if DeviceUtil.isLandscape && setting.readingDirection != .vertical {
+                            Menu {
+                                Button {
+                                    setting.enablesDualPageMode.toggle()
+                                } label: {
+                                    Text(L10n.Localizable.ReadingView.ToolbarItem.Title.dualPageMode)
+                                    if setting.enablesDualPageMode {
+                                        Image(systemSymbol: .checkmark)
+                                    }
+                                }
+                                Button {
+                                    setting.exceptCover.toggle()
+                                } label: {
+                                    Text(L10n.Localizable.ReadingView.ToolbarItem.Title.exceptTheCover)
+                                    if setting.exceptCover {
+                                        Image(systemSymbol: .checkmark)
+                                    }
+                                }
+                                .disabled(!setting.enablesDualPageMode)
+                            } label: {
+                                Image(systemSymbol: .rectangleSplit2x1)
+                                    .symbolVariant(setting.enablesDualPageMode ? .fill : .none)
+
+
+                            }
+                        }
+                        Menu {
+                            Text(L10n.Localizable.ReadingView.ToolbarItem.Title.autoPlay).foregroundColor(.secondary)
+                            ForEach(AutoPlayPolicy.allCases) { policy in
+                                Button {
+                                    autoPlayPolicy = policy
+                                } label: {
+                                    Text(policy.value)
+                                    if autoPlayPolicy == policy {
+                                        Image(systemSymbol: .checkmark)
+                                    }
+                                }
+                            }
+
+                        } label: {
+                            Image(systemSymbol: .timer)
+
+
+                        }
+                        ToolbarFeaturesMenu {
+                            Button(action: retryAllFailedImagesAction) {
+                                Image(systemSymbol: .exclamationmarkArrowTriangle2Circlepath)
+                                Text(L10n.Localizable.ReadingView.ToolbarItem.Button.retryAllFailedImages)
+                            }
+                            Button(action: reloadAllImagesAction) {
+                                Image(systemSymbol: .arrowCounterclockwise)
+                                Text(L10n.Localizable.ReadingView.ToolbarItem.Button.reloadAllImages)
+                            }
+                            Button(action: navigateSettingAction) {
+                                Image(systemSymbol: .gear)
+                                Text(L10n.Localizable.ReadingView.ToolbarItem.Button.readingSetting)
+                            }
+                        }
+                        .padding(.trailing, 20)
+
+                    }
+
+                    .font(.title2)
+                }
+                Text(title).bold().lineLimit(1).padding()
+
+
             }
-            .foregroundStyle(.primary)
-            .padding(.horizontal, 20)
-            .background(.thinMaterial.opacity(0.75))
+            .background(.thinMaterial)
         }
     }
 }
@@ -276,25 +343,32 @@ private struct LowerPanel<G: Gesture>: View {
         self.fetchPreviewURLsAction = fetchPreviewURLsAction
     }
 
-    var slider: some View {
-        Slider(
-            value: $sliderValue,
-            in: range,
-            onEditingChanged: {
-                if !$0 {
-                    showsSliderPreview = false
+    var body: some View {
+        VStack(spacing: 30) {
+            let dismissButton = Button(action: dismissAction) {
+                let image = Image(systemSymbol: .xmark)
+                    .foregroundColor(.primary)
+                if #available(iOS 26.0, *) {
+                    image
+                        .font(.title2)
+                        .frame(width: 44, height: 44)
                 } else {
-                    showsSliderPreview = true
+                    image
+                        .padding()
+                        .background(.ultraThinMaterial)
+                        .cornerRadius(.infinity)
                 }
             }
-        )
-            .frame(width: DeviceUtil.windowW * 0.6)
-            .rotationEffect(.init(degrees: isReversed ? 180 : 0))
-    }
+            .gesture(dismissGesture)
+            .opacity(showsSliderPreview ? 0 : 1)
+            if #available(iOS 26.0, *) {
+                dismissButton.glassEffect(.regular.interactive())
+            } else {
+                dismissButton
+            }
+            
 
-    var sliderPanel: some View {
-        VStack(spacing: 30) {
-            VStack(spacing: 0) {
+            let sliderPanel = VStack(spacing: 0) {
                 SliderPreivew(
                     showsSliderPreview: $showsSliderPreview,
                     sliderValue: $sliderValue,
@@ -310,13 +384,22 @@ private struct LowerPanel<G: Gesture>: View {
                         .font(.caption)
                         .padding()
 
+                    let slider = Slider(
+                        value: $sliderValue,
+                        in: range,
+                        onEditingChanged: { if !$0 { showsSliderPreview = false } }
+                    )
+                    .rotationEffect(.init(degrees: isReversed ? 180 : 0))
                     if #available(iOS 26.0, *) {
-                        slider.simultaneousGesture(
-                            LongPressGesture(minimumDuration: .infinity, maximumDistance: .infinity)
-                                .onChanged({ if $0 { showsSliderPreview = true } })
-                        )
+                        slider
+                            .simultaneousGesture(
+                                LongPressGesture(minimumDuration: .infinity, maximumDistance: .infinity)
+                                    .onChanged({ if $0 { showsSliderPreview = true } })
+                            )
+                            .frame(width: DeviceUtil.windowW * 0.6)
                     } else {
                         slider
+                            .padding(.horizontal).padding(.bottom)
                     }
 
                     Text(isReversed ? "\(Int(range.lowerBound))" : "\(Int(range.upperBound))")
@@ -325,18 +408,13 @@ private struct LowerPanel<G: Gesture>: View {
                         .padding()
                 }
             }
-            .backport.glassEffect(in: .rect(cornerRadius: 16))
-            .padding(.horizontal, SliderPreivew.outerPadding)
-        }
-    }
-
-    var body: some View {
-        if #available(iOS 26.0, *) {
-            sliderPanel
-        } else {
-            sliderPanel
-                .background(.thinMaterial.opacity(0.75))
-                .cornerRadius(16)
+            if #available(iOS 26.0, *) {
+                sliderPanel
+                    .glassEffect(in: .rect(cornerRadius: 16))
+                    .padding(.horizontal, SliderPreivew.outerPadding)
+            } else {
+                sliderPanel.background(.thinMaterial)
+            }
         }
     }
 }
@@ -369,7 +447,7 @@ private struct SliderPreivew: View {
     }
 
     var body: some View {
-        HStack(spacing: previewSpacing) {
+        let previewStack = HStack(spacing: previewSpacing) {
             ForEach(previewsIndices, id: \.self) { index in
                 let (url, modifier) = PreviewResolver.getPreviewConfigs(originalURL: previewURLs[index])
                 VStack {
@@ -395,8 +473,13 @@ private struct SliderPreivew: View {
         }
         .opacity(showsSliderPreview ? 1 : 0)
         .padding(.vertical, verticalPadding)
-        .padding(.horizontal, horizontalPadding)
         .frame(height: showsSliderPreview ? previewHeight + verticalPadding * 2 : 0)
+        if #available(iOS 26.0, *) {
+            previewStack
+                .padding(.horizontal, horizontalPadding)
+        } else {
+            previewStack
+        }
     }
 }
 
@@ -425,7 +508,10 @@ private extension SliderPreivew {
     var previewWidth: CGFloat {
         guard previewsCount > 0 else { return 0 }
         let count = CGFloat(previewsCount)
-        let spacing = (count + 1) * previewSpacing + horizontalPadding * 2 + Self.outerPadding * 2
+        var spacing = (count + 1) * previewSpacing
+        if #available(iOS 26.0, *) {
+            spacing = spacing + horizontalPadding * 2 + Self.outerPadding * 2
+        }
         return (DeviceUtil.windowW - spacing) / count
     }
     func checkIndex(_ index: Int) -> Bool {

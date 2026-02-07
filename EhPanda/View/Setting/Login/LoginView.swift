@@ -48,24 +48,36 @@ struct LoginView: View {
                     }
                     .padding(.horizontal, proxy.size.width * 0.2)
 
-                    Button {
+                    let button = Button {
                         store.send(.login)
                     } label: {
-                        Image(systemSymbol: .chevronForward)
+                        let image = Image(systemSymbol: .chevronForward)
                             .padding()
-                            .clipShape(.circle)
+                        if #available(iOS 26.0, *) {
+                            image
+                                .clipShape(.circle)
+                        } else {
+                            image
+                        }
                     }
                     .overlay {
                         ProgressView()
                             .tint(nil)
                             .opacity(store.loginState == .loading ? 1 : 0)
                     }
-                    .font(.title)
                     .foregroundStyle(store.loginButtonColor)
                     .disabled(store.loginButtonDisabled)
-                    .backport.glassEffect(.regularInteractive, in: .circle)
-                    .clipShape(.circle)
                     .padding(.top, 30)
+                    if #available(iOS 26.0, *) {
+                        button
+                            .font(.title)
+                            .glassEffect(.regular.interactive(), in: .circle)
+                            .clipShape(.circle)
+                    } else {
+                        button
+                            .imageScale(.large)
+                            .font(.largeTitle)
+                    }
                 }
             }
         }
@@ -126,14 +138,19 @@ private struct LoginTextField: View {
         colorScheme == .light ? Color(.systemGray6) : Color(.systemGray5)
     }
 
-    var loginFields: some View {
-        Group {
-            if isPassword {
-                SecureField("", text: $text)
-            } else {
-                TextField("", text: $text)
+    var body: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Text(description)
+                .font(.caption)
+                .foregroundStyle(.secondary)
+
+            let loginFields = Group {
+                if isPassword {
+                    SecureField("", text: $text)
+                } else {
+                    TextField("", text: $text)
+                }
             }
-        }
             .focused(focusedField.projectedValue, equals: isPassword ? .password : .username)
             .textContentType(isPassword ? .password : .username)
             .submitLabel(isPassword ? .done : .next)
@@ -141,18 +158,13 @@ private struct LoginTextField: View {
             .disableAutocorrection(true)
             .keyboardType(isPassword ? .asciiCapable : .default)
             .padding(10)
-    }
-
-    var body: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            Text(description)
-                .font(.caption)
-                .foregroundStyle(.secondary)
-
+            
             if #available(iOS 26.0, *) {
-                loginFields.glassEffect(.regular.tint(Color(.systemGray5)), in: .rect(cornerRadius: 8))
+                loginFields
+                    .glassEffect(.regular.tint(Color(.systemGray5)), in: .rect(cornerRadius: 8))
             } else {
-                loginFields.background(backgroundColor.opacity(0.75).cornerRadius(8))
+                loginFields
+                    .background(backgroundColor.opacity(0.75).cornerRadius(8))
             }
         }
     }
