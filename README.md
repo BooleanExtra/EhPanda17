@@ -43,4 +43,3 @@ The content in this application is derived from E-Hentai, which is user-generate
 
 ## Screenshots
 https://ehpanda.app
-
