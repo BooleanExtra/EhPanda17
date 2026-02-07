@@ -77,7 +77,7 @@ struct LaboratoryCell: View {
         .cornerRadius(15)
         .lineLimit(1)
         .animation(.default, value: isOn)
-        
+
         if #available(iOS 26.0, *) {
             cell
                 .foregroundStyle(contentColor)
@@ -87,7 +87,7 @@ struct LaboratoryCell: View {
         } else {
             cell
         }
-        
+
     }
 }
 
