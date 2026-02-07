@@ -107,6 +107,7 @@ jobs:
           echo "`jq '.apps[0].versions[0].localizedDescription="${{ steps.retrieve-data.outputs.notes }}"' $ALTSTORE_JSON_PATH`" > $ALTSTORE_JSON_PATH
           echo "`jq '.apps[0].versions[0].date="${{ steps.retrieve-data.outputs.version_date }}"' $ALTSTORE_JSON_PATH`" > $ALTSTORE_JSON_PATH
           echo "`jq '.apps[0].versions[0].version="${{ steps.bump-version.outputs.version }}"' $ALTSTORE_JSON_PATH`" > $ALTSTORE_JSON_PATH
+          echo "`jq '.apps[0].versions[0].minOSVersion="17.0"' $ALTSTORE_JSON_PATH`" > $ALTSTORE_JSON_PATH
           echo "`jq '.apps[0].versions[0].downloadURL="https://github.com/BooleanExtra/EhPanda17/releases/download/v${{ steps.bump-version.outputs.version }}/EhPanda.ipa"' $ALTSTORE_JSON_PATH`" > $ALTSTORE_JSON_PATH
       - name: Commit update AltStore.json
         run: |
