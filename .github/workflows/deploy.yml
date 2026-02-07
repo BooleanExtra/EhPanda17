@@ -16,7 +16,7 @@ env:
   THIN_PAYLOAD_SCRIPT_PATH: './actions-tool/thin-payload.sh'
   ARCHIVE_PATH: '/tmp/action-builds/EhPanda.xcarchive'
   IPA_OUTPUT_PATH: '/tmp/action-builds/EhPanda.ipa'
-
+permissions: write-all
 jobs:
   Deploy:
     runs-on: macos-26
