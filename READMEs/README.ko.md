@@ -25,7 +25,7 @@ GitHub Readme: [README.{lang}.md](/READMEs)
 https://ehpanda.app: [main.js](https://github.com/EhPanda-Team/ehpanda-website/blob/main/src/main.js)
 
 ## 다운로드
-1. [Releases](https://github.com/EhPanda-Team/EhPanda/releases)에서 ipa 파일을 다운로드 받으세요.
+1. [Releases](https://github.com/BooleanExtra/EhPanda17/releases)에서 ipa 파일을 다운로드 받으세요.
 2. [AltStore](https://altstore.io)를 사용해서 ipa 파일을 설치할 수 있습니다.
 
 ## 시스템 요구 사항
@@ -43,3 +43,4 @@ iOS / iPadOS 버전이 17.0 이상인지 확인해주세요.
 
 ## 화면캡쳐
 https://ehpanda.app
+
